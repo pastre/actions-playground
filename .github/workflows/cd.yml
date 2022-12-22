@@ -3,7 +3,7 @@ name: Release Train
 on: workflow_dispatch
 
 jobs:
-  Generate APK:
+  generate_apk:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
