@@ -11,13 +11,8 @@ jobs:
         with:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
-        with:
-          channel: 'beta'
-      - run: cd driver
-      - run: flutter pub get
-      - run: flutter format --set-exit-if-changed .
-      - run: flutter analyze .
-      - run: flutter build apk
+      - run: cd driver && flutter pub get
+      - run:  cd driver &&flutter build apk
       - uses: actions/upload-artifact@v3
         with:
           name: release-apk
