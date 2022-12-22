@@ -1,2 +1,5 @@
 todo:
-  keyword: "TODO"
+  keyword:
+    - 'TODO'
+    - '// TODO'
+    - 'TODO:'
