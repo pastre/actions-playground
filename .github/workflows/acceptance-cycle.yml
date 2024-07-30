@@ -19,10 +19,6 @@ jobs:
     steps:
       - name: Acceptance tests
         run: echo "all tests are good"
-  trigger-release:
-    needs: [ios, android, flutter]
-    uses: ./.github/workflows/release-cycle.yml
-    name: Start release
   publish-results:
     runs-on: ubuntu-latest
     needs: [ios, android, flutter]
