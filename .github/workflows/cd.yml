@@ -9,6 +9,7 @@ jobs:
   commit-cycle-android:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
         id: changes-android
         with:
@@ -25,6 +26,7 @@ jobs:
   commit-cycle-ios:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
         id: changes-android
         with:
@@ -41,6 +43,7 @@ jobs:
   commit-cycle-flutter:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
         id: changes-android
         with:
