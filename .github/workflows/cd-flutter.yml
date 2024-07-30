@@ -22,4 +22,4 @@ jobs:
     needs: [commit-cycle, acceptance-cycle]
     concurrency: release-cycle
     name: Release cycle
-    uses: .github/workflows/release-cycle.yaml
+    uses: ./.github/workflows/release-cycle.yml

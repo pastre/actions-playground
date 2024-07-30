@@ -1,3 +1,3 @@
 echo "$PWD started..."
-sleep 10
+sleep 1
 echo "$PWD is done!"
