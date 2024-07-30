@@ -10,18 +10,14 @@ jobs:
     name: Commit cycle
     uses: ./.github/workflows/commit-cycle.yml
   acceptance-cycle:
-    needs: [commit-cycle-android, commit-cycle-ios, commit-cycle-flutter]
+    needs: commit-cycle
     concurrency:
       group: acceptance-cycle
       cancel-in-progress: false
     name: Acceptance cycle
     uses: ./.github/workflows/acceptance-cycle.yml
   release-cycle:
-    needs:
-      - commit-cycle-android
-      - commit-cycle-ios
-      - commit-cycle-flutter
-      - acceptance-cycle
+    needs: [acceptance-cycle, commit-cycle]
     concurrency:
       group: release-cycle
       cancel-in-progress: false
