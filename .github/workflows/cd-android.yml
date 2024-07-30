@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build
-        run: echo "Android test done!"
+        run: sleep 10 && echo "Android test done!"
   acceptance-cycle:
     needs: [commit-cycle]
     concurrency: acceptance-cycle

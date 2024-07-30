@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build
-        run: echo "iOS test done!"
+        run: sleep 5 && echo "iOS test done!"
   acceptance-cycle:
     needs: [commit-cycle]
     concurrency: acceptance-cycle
