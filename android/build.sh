@@ -1,3 +1,3 @@
 echo "$PWD started..."
-sleep 12
+sleep 11
 echo "Android is done!"
