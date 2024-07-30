@@ -1,0 +1,30 @@
+name: Acceptance-cycle
+
+on:
+  workflow_call:
+
+jobs:
+  ios:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build tvos app
+        run: echo "tvOS app built!"
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Espresso tests
+        run: echo "Espresso is out"
+  flutter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Acceptance tests
+        run: echo "all tests are good"
+  trigger-release:
+    needs: [ios, android, flutter]
+    uses: .github/workflows/release-cycle.yaml
+  publish-results:
+    runs-on: ubuntu-latest
+    needs: [ios, android, flutter]
+    steps:
+      - name: Echo jobs statuses
+        run: echo "${{ job.status }} ${{ join(needs.*.result, ' ') }}"

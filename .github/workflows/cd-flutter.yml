@@ -1,0 +1,25 @@
+name: Flutter pipeline
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - flutter
+
+jobs:
+  commit-cycle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build
+        run: flutter/build.sh
+  acceptance-cycle:
+    needs: [commit-cycle]
+    concurrency: acceptance-cycle
+    name: Acceptance cycle
+    uses: .github/workflows/acceptance-cycle.yaml
+  release-cycle:
+    needs: [commit-cycle, acceptance-cycle]
+    concurrency: release-cycle
+    name: Release cycle
+    uses: .github/workflows/release-cycle.yaml
