@@ -1,3 +1,4 @@
+ARGS="$@"
 git add .
-git commit -m $@
+git commit -m "$ARGS"
 git push
