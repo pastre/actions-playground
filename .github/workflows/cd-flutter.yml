@@ -17,7 +17,7 @@ jobs:
     needs: [commit-cycle]
     concurrency: acceptance-cycle
     name: Acceptance cycle
-    uses: .github/workflows/acceptance-cycle.yaml
+    uses: ./.github/workflows/acceptance-cycle.yml
   release-cycle:
     needs: [commit-cycle, acceptance-cycle]
     concurrency: release-cycle
