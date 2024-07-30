@@ -1,0 +1,56 @@
+name: Acceptance-cycle
+
+on:
+  workflow_call:
+
+jobs:
+  commit-cycle-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            changes:
+              - '.github/workflows/acceptance-cycle.yml'
+              - '.github/workflows/release-cycle.yml'
+              - '.github/workflows/cd.yml'
+              - android/**
+      - name: Build
+        if: steps.changes.outputs.changes == 'true'
+        run: sleep 10 && echo "Android test done!"
+
+  commit-cycle-ios:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            changes:
+              - '.github/workflows/acceptance-cycle.yml'
+              - '.github/workflows/release-cycle.yml'
+              - '.github/workflows/cd.yml'
+              - ios/**
+      - name: Build
+        if: steps.changes.outputs.changes == 'true'
+        run: sleep 10 && echo "iOS test done!"
+
+  commit-cycle-flutter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            changes:
+              - '.github/workflows/acceptance-cycle.yml'
+              - '.github/workflows/release-cycle.yml'
+              - '.github/workflows/cd.yml'
+              - 'flutter/**'
+      - name: Build
+        if: steps.changes.outputs.changes == 'true'
+        run: sleep 10 && echo "Flutter test done!"
