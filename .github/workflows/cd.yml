@@ -1,0 +1,73 @@
+name: All platforms
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  commit-cycle-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dorny/paths-filter@v3
+        id: changes-android
+        with:
+          filters: |
+            changes:
+              - '.github/workflows/acceptance-cycle.yml'
+              - '.github/workflows/release-cycle.yml'
+              - '.github/workflows/cd.yml'
+              - android/**
+      - name: Build
+        if: steps.changes.outputs.changes == 'true'
+        run: sleep 10 && echo "Android test done!"
+
+  commit-cycle-ios:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dorny/paths-filter@v3
+        id: changes-android
+        with:
+          filters: |
+            changes:
+              - '.github/workflows/acceptance-cycle.yml'
+              - '.github/workflows/release-cycle.yml'
+              - '.github/workflows/cd.yml'
+              - ios/**
+      - name: Build
+        if: steps.changes.outputs.changes == 'true'
+        run: sleep 10 && echo "iOS test done!"
+
+  commit-cycle-flutter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dorny/paths-filter@v3
+        id: changes-android
+        with:
+          filters: |
+            changes:
+              - '.github/workflows/acceptance-cycle.yml'
+              - '.github/workflows/release-cycle.yml'
+              - '.github/workflows/cd.yml'
+              - 'flutter/**'
+      - name: Build
+        if: steps.changes.outputs.changes == 'true'
+        run: sleep 10 && echo "Flutter test done!"
+  acceptance-cycle:
+    needs: [commit-cycle-android, commit-cycle-ios, commit-cycle-flutter]
+    concurrency:
+      group: acceptance-cycle
+      cancel-in-progress: false
+    name: Acceptance cycle
+    uses: ./.github/workflows/acceptance-cycle.yml
+  release-cycle:
+    needs:
+      - commit-cycle-android
+      - commit-cycle-ios
+      - commit-cycle-flutter
+      - acceptance-cycle
+    concurrency:
+      group: release-cycle
+      cancel-in-progress: false
+    name: Release cycle
+    uses: ./.github/workflows/release-cycle.yml
