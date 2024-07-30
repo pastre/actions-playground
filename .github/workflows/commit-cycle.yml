@@ -20,7 +20,6 @@ jobs:
       - name: Build
         if: steps.changes.outputs.changes == 'true'
         run: sleep 10 && echo "Android test done!"
-
   commit-cycle-ios:
     runs-on: ubuntu-latest
     steps:
