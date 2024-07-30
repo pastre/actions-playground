@@ -5,7 +5,8 @@ on:
     branches:
       - main
     paths:
-      - flutter
+      - flutter/**
+      - .github/cd-flutter.yml
 
 jobs:
   commit-cycle:

@@ -5,7 +5,8 @@ on:
     branches:
       - main
     paths:
-      - ios
+      - ios/**
+      - .github/cd-ios.yml
 
 jobs:
   commit-cycle:
