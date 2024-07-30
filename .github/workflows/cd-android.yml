@@ -6,14 +6,14 @@ on:
       - main
     paths:
       - android/**
-      - .github/cd-android.yml
+      - .github/workflows/cd-android.yml
 
 jobs:
   commit-cycle:
     runs-on: ubuntu-latest
     steps:
       - name: Build
-        run: anroid/build.sh
+        run: android/build.sh
   acceptance-cycle:
     needs: [commit-cycle]
     concurrency: acceptance-cycle
