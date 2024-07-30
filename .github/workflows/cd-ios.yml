@@ -16,11 +16,15 @@ jobs:
         run: sleep 5 && echo "iOS test done!"
   acceptance-cycle:
     needs: [commit-cycle]
-    concurrency: acceptance-cycle
+    concurrency:
+      group: acceptance-cycle
+      cancel-in-progress: false
     name: Acceptance cycle
     uses: ./.github/workflows/acceptance-cycle.yml
   release-cycle:
     needs: [commit-cycle, acceptance-cycle]
-    concurrency: release-cycle
+    concurrency:
+      group: release-cycle
+      cancel-in-progress: false
     name: Release cycle
     uses: ./.github/workflows/release-cycle.yml
